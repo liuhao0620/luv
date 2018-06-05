@@ -93,21 +93,13 @@ SET(SRC_LUACORE
 
 ## GENERATE
 
-IF(WITH_SHARED_LUA)
-  IF(WITH_AMALG)
-    add_library(lualib SHARED ${LUA_DIR}/../lua_one.c)
-  ELSE()
-    add_library(lualib SHARED ${SRC_LUACORE})
-  ENDIF()
+IF(WITH_AMALG)
+  add_library(lualib SHARED ${LUA_DIR}/../lua_one.c )
 ELSE()
-  IF(WITH_AMALG)
-    add_library(lualib STATIC ${LUA_DIR}/../lua_one.c )
-  ELSE()
-    add_library(lualib STATIC ${SRC_LUACORE} )
-  ENDIF()
-  set_target_properties(lualib PROPERTIES
-    PREFIX "lib" IMPORT_PREFIX "lib")
+  add_library(lualib SHARED ${SRC_LUACORE} )
 ENDIF()
+set_target_properties(lualib PROPERTIES
+  PREFIX "lib" IMPORT_PREFIX "lib")
 
 target_link_libraries (lualib ${LIBS} )
 set_target_properties (lualib PROPERTIES OUTPUT_NAME "lua53")

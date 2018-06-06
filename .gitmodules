@@ -10,3 +10,9 @@
 [submodule "lua-compat-5.3"]
 	path = deps/lua-compat-5.3
 	url = https://github.com/keplerproject/lua-compat-5.3.git
+[submodule "deps/kcp"]
+	path = deps/kcp
+	url = https://github.com/skywind3000/kcp.git
+[submodule "deps/lua-protobuf"]
+	path = deps/lua-protobuf
+	url = https://github.com/starwing/lua-protobuf.git

@@ -3,6 +3,7 @@ libluv.a
 libluv.so
 luv.so
 luv.dll
+lua.exe
 luajit.exe
 luv-*.tar.gz
 luv-*.src.rock

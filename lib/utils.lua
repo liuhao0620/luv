@@ -91,7 +91,7 @@ function utils.dump(o, depth)
     if type(depth) == 'nil' then
       depth = 0
     end
-    if depth > 1 then
+    if depth > 2 then
       return utils.colorize("yellow", tostring(o))
     end
     local indent = ("  "):rep(depth)

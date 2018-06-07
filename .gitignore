@@ -1,6 +1,9 @@
 build
 libluv.a
 libluv.so
+lkcp.so
+lutl.so
+pb.so
 luv.so
 luv.dll
 lua.exe

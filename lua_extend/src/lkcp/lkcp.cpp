@@ -1,4 +1,4 @@
-extern "C"
+﻿extern "C"
 {
 #include "lua.h"
 #include "lauxlib.h"
@@ -149,6 +149,20 @@ static int LkcpCreate(lua_State * L)
 	lua_pushvalue(L, -1);
 	handle->ref = luaL_ref(L, LUA_REGISTRYINDEX);
 	kcp->output = LkcpOutputCb;
+	return 1;
+}
+
+static int LkcpGetConv(lua_State * L)
+{
+	size_t size;
+	const char * data = (const char *)luaL_checklstring(L, 1, &size);
+	if (data == NULL)
+	{
+		lua_pushnil(L);
+		return 1;
+	}
+	IUINT32 conv = ikcp_getconv((const void *)data);
+	lua_pushinteger(L, conv);
 	return 1;
 }
 
@@ -347,13 +361,14 @@ static int LkcpIkcpcbTostring(lua_State * L)
 static const luaL_Reg kLkcpFunctions[] =
 {
 	{"create", LkcpCreate },
+	{"getconv", LkcpGetConv },
 	{NULL, NULL }
 };
 
 static const luaL_Reg kKcpcbFunctions[] =
 {
-	// release
-	{"release", LkcpRelease },
+	// release will be called by gc
+	//{"release", LkcpRelease },
 
 	// set optionas
 	{"nodelay", LkcpNodelay },
@@ -380,8 +395,8 @@ extern "C"
 		luaL_newmetatable(L, "ikcpcb");
 		lua_pushcfunction(L, LkcpIkcpcbTostring);
 		lua_setfield(L, -2, "__tostring");
-		//lua_pushcfunction(L, LkcpIkcpcbGc);
-		//lua_setfield(L, -2, "__gc");
+		lua_pushcfunction(L, LkcpRelease);
+		lua_setfield(L, -2, "__gc");
 		lua_newtable(L);
 		luaL_setfuncs(L, kKcpcbFunctions, 0);
 		lua_setfield(L, -2, "__index");

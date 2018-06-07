@@ -157,8 +157,8 @@ local LkcpTestImpl = function(mode, p)
     end
     local test_end = lutl.getsystime()
     
-    kcp1:release()
-    kcp2:release()
+--    kcp1:release()
+--    kcp2:release()
     p(costtimes)
     p("send", send_index, "recv", recv_count, "use time", test_end - test_begin)
 end

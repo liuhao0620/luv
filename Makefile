@@ -55,7 +55,7 @@ lutl:build/CMakeFiles/lutl.dir/ build/CMakeFiles/lutl.dir/tm.o build/CMakeFiles/
 clean:
 	rm -rf build luv.so
 
-test: luv
+test: luv lkcp lpb lutl
 	${LUABIN} tests/run.lua
 
 reset:

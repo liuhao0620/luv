@@ -2,6 +2,7 @@ build
 libluv.a
 libluv.so
 lkcp.so
+lspdlog.so
 lutl.so
 pb.so
 luv.so

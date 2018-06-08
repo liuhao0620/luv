@@ -25,7 +25,7 @@ CMAKE_OPTIONS += \
 	-DLUA_BUILD_TYPE=$(LUA_BUILD_TYPE) \
 	-DLUA_COMPAT53_DIR=deps/lua-compat-5.3
 
-all: luv lkcp lpb lutl
+all: luv lkcp lpb lspdlog lutl
 
 deps/libuv/include:
 	git submodule update --init deps/libuv
@@ -48,6 +48,10 @@ lpb:build/CMakeFiles/lpb.dir/ build/CMakeFiles/lpb.dir/pb.o build/liblua53.so
 	g++ -o2 -std=c++11 -shared -Ideps/lua-protobuf/ -Ideps/lua/ -Ideps/lua-compat-5.3/ -DLUA_BUILD_AS_DLL -DLUA_LIB -o build/pb.so build/CMakeFiles/lpb.dir/pb.o build/liblua53.so
 	ln -sf build/pb.so
 
+lspdlog:build/CMakeFiles/lspdlog.dir/ build/CMakeFiles/lspdlog.dir/lspdlog.o build/liblua53.so
+	g++ -o2 -std=c++11 -shared -Ideps/spdlog/include/spdlog/ -Ideps/lua/ -Ideps/lua-compat-5.3/ -DLUA_BUILD_AS_DLL -DLUA_LIB -o build/lspdlog.so build/CMakeFiles/lspdlog.dir/lspdlog.o build/liblua53.so
+	ln -sf build/lspdlog.so
+
 lutl:build/CMakeFiles/lutl.dir/ build/CMakeFiles/lutl.dir/tm.o build/CMakeFiles/lutl.dir/lutl.o
 	g++ -o2 -std=c++11 -shared -Ideps/lua/ -Ideps/lua-compat-5.3/ -DLUA_BUILD_AS_DLL -DLUA_LIB -o build/lutl.so build/CMakeFiles/lutl.dir/tm.o build/CMakeFiles/lutl.dir/lutl.o build/liblua53.so
 	ln -sf build/lutl.so
@@ -55,7 +59,7 @@ lutl:build/CMakeFiles/lutl.dir/ build/CMakeFiles/lutl.dir/tm.o build/CMakeFiles/
 clean:
 	rm -rf build luv.so
 
-test: luv lkcp lpb lutl
+test: luv lkcp lpb lspdlog lutl
 	${LUABIN} tests/run.lua
 
 reset:
@@ -87,6 +91,12 @@ build/CMakeFiles/lpb.dir/:
 
 build/CMakeFiles/lpb.dir/pb.o:deps/lua-protobuf/pb.c
 	gcc -o2 -fPIC -Ideps/lua-protobuf/ -Ideps/lua/ -Ideps/lua-compat-5.3/ -o $@ -c deps/lua-protobuf/pb.c
+
+build/CMakeFiles/lspdlog.dir/:
+	mkdir -p build/CMakeFiles/lspdlog.dir/
+
+build/CMakeFiles/lspdlog.dir/lspdlog.o:lua_extend/src/lspdlog/lspdlog.cpp
+	g++ -o2 -std=c++11 -fPIC -Ideps/spdlog/include/spdlog/ -Ideps/lua/ -Ideps/lua-compat-5.3/ -o $@ -c lua_extend/src/lspdlog/lspdlog.cpp
 
 build/CMakeFiles/lutl.dir/:
 	mkdir -p build/CMakeFiles/lutl.dir/

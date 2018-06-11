@@ -25,12 +25,6 @@
     <Filter Include="Header Files\fmt\bundled">
       <UniqueIdentifier>{10605fe8-d001-42b5-b79c-1dd7996b25de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\fmt">
-      <UniqueIdentifier>{df14cce9-c859-4113-a9b9-4590a8fda1ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\fmt\bundled">
-      <UniqueIdentifier>{298f0166-1472-42d4-9cd2-13058efefb60}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\lspdlog\lspdlog.cpp">
